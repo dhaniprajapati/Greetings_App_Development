@@ -1,8 +1,10 @@
 package com.greetings_app.demoapi.controller;
 
+import com.greetings_app.demoapi.dto.UserDTO;
 import com.greetings_app.demoapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 // Base path for all
@@ -13,31 +15,35 @@ public class UserController {
     //GET
     // curl -X GET http://localhost:8080/api/greet
     @GetMapping("/greet")
-    public String sayHello(){
+    public String sayHello() {
         return "{\"message\" : \"Hello World.\"";
     }
+
     //POST
     //curl -X POST http://localhost:8080/api/post
     @PostMapping("/post")
-    public String sayHelloPost(){
+    public String sayHelloPost() {
         return "{\"message\" : \"Hello World. Greeting posted.\"";
     }
+
     //PUT
     //curl -X PUT http://localhost:8080/api/put
     @PutMapping("/put")
-    public String sayHelloPut(){
+    public String sayHelloPut() {
         return "{\"message\" : \"Hello World. Greeting updated.\"";
     }
+
     //PATCH
     //curl -X PATCH http://localhost:8080/api/patch
     @PatchMapping("/patch")
-    public String sayHelloPatch(){
+    public String sayHelloPatch() {
         return "{\"message\" : \"Hello World. Partally.\"";
     }
+
     //DELETE
     //curl -X DELETE http://localhost:8080/api/delete
     @DeleteMapping("/delete")
-    public String sayHelloDelete(){
+    public String sayHelloDelete() {
         return "{\"message\" : \"Greeting deleted.\"";
     }
 
@@ -46,6 +52,7 @@ public class UserController {
     @Autowired
     //automatically injects the UserService bean into this controller
     private UserService userService;
+
     // Constructor-based Dependency Injection
     public UserController(UserService userService) {
         this.userService = userService;
@@ -54,5 +61,11 @@ public class UserController {
     //calls the getGreetingMessage method from UserService to get the greeting message
     public String sayHelloGet() {
         return UserService.getGreetingMessage();
+    }
+
+    //UC_3- to give Greeting message with name
+    @PostMapping("/postGreet")
+    public String getGreetingMessage(@RequestBody UserDTO request) {
+        return userService.greetingMessage(request.getFirstName(), request.getLastName());
     }
 }
