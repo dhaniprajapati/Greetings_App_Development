@@ -1,10 +1,15 @@
 package com.greetings_app.demoapi.service;
+import com.greetings_app.demoapi.entity.UserEntity;
+import com.greetings_app.demoapi.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
     //UC_2-
-    public static String getGreetingMessage() {
+    public String getGreetingMessage() {
         return "Hello World.";
     }
 
@@ -26,5 +31,18 @@ public class UserService {
         else {
             return "Hello World!";
         }
+    }
+
+    //UC_4-save the greeting message in the repository
+    //injects UserRepository into this service
+    @Autowired
+    private UserRepository repository;
+    //saves a new greeting message to the database
+    public UserEntity saveMessage(String message) {
+        return repository.save(new UserEntity(message));
+    }
+    //retrieves all greeting messages from the database
+    public List<UserEntity> getAllMessages() {
+        return repository.findAll();
     }
 }
