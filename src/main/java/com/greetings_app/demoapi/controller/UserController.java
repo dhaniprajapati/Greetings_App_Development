@@ -4,6 +4,7 @@ import com.greetings_app.demoapi.dto.UserDTO;
 import com.greetings_app.demoapi.entity.UserEntity;
 import com.greetings_app.demoapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -79,6 +80,8 @@ public class UserController {
     public UserEntity saveGreeting(@RequestBody String message) {
         return userService.saveMessage(message);
     }
+
+    //UC_6-list all greeting messages
     //retrieves all stored greeting messages
     @GetMapping
     public List<UserEntity> getAllGreetings() {
