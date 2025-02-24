@@ -100,4 +100,10 @@ public class UserController {
     public UserEntity updateGreeting(@PathVariable Long id, @RequestBody String newMessage) {
         return userService.editMessage(id, newMessage);
     }
+
+    //UC_8- delete a message
+    @DeleteMapping("/greetings/{id}")
+    public void deleteGreeting(@PathVariable Long id) {
+        userService.deleteMessage(id);
+    }
 }
