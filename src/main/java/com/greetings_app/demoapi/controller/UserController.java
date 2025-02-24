@@ -62,6 +62,7 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
     @GetMapping("/greeting")
     //calls the getGreetingMessage method from UserService to get the greeting message
     public String sayHelloGet() {
@@ -92,5 +93,11 @@ public class UserController {
     @GetMapping("/{id}")
     public Optional<UserEntity> getGreetingById(@PathVariable Long id) {
         return userService.getMessageById(id);
+    }
+
+    //UC_7- edit a greeting message
+    @PutMapping("/greetings/{id}")
+    public UserEntity updateGreeting(@PathVariable Long id, @RequestBody String newMessage) {
+        return userService.editMessage(id, newMessage);
     }
 }

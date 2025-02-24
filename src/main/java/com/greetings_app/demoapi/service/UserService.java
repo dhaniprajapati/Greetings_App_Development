@@ -1,4 +1,5 @@
 package com.greetings_app.demoapi.service;
+import com.greetings_app.demoapi.dto.UserDTO;
 import com.greetings_app.demoapi.entity.UserEntity;
 import com.greetings_app.demoapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,16 @@ public class UserService {
         return repository.findById(id);
     }
 
-
+    //UC_7- edit a greeting message
+    public UserEntity editMessage(Long id, String newMessage) {
+        Optional<UserEntity> optionalUserEntity = repository.findById(id);
+        if (optionalUserEntity.isPresent()) {
+            UserEntity userEntity = optionalUserEntity.get();
+            userEntity.setMessage(newMessage);
+            return repository.save(userEntity);
+        }
+        else {
+            return null;
+        }
+    }
 }
