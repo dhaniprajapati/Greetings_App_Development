@@ -67,4 +67,9 @@ public class UserService {
             return null;
         }
     }
+
+    //UC_8- to delete a message by id
+    public void deleteMessage(Long id) {
+        repository.deleteById(id);
+    }
 }
